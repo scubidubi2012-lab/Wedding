@@ -3,95 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Wedding Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital@0;1&family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <title>Our AI Wedding Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;1,700&family=Poppins:wght@300&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Pink Palette */
             --baby-pink: #fce4ec;
             --soft-pink: #f8bbd0;
             --rose-pink: #f06292;
             --deep-rose: #880e4f;
-            --gold-accent: #c5a059;
-            --white-silk: #ffffff;
+            --gold: #c5a059;
         }
 
         body, html {
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
             background-color: var(--baby-pink);
             font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* Curtain Transition Effect */
-        .section {
+        /* --- CURTAIN ANIMATION --- */
+        .curtain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 9999;
+            pointer-events: none;
+            display: flex;
+        }
+
+        .curtain {
+            width: 50%;
+            height: 100%;
+            background: var(--deep-rose);
+            transition: transform 2.5s cubic-bezier(0.7, 0, 0.3, 1);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .left-curtain { border-right: 2px solid var(--gold); transform: translateX(0); }
+        .right-curtain { border-left: 2px solid var(--gold); transform: translateX(0); }
+
+        /* Class to trigger opening */
+        .curtain-opened .left-curtain { transform: translateX(-100%); }
+        .curtain-opened .right-curtain { transform: translateX(100%); }
+
+        /* --- PAGE CONTENT --- */
+        section {
             height: 100vh;
             width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
             text-align: center;
-            padding: 40px;
+            padding: 20px;
             box-sizing: border-box;
-            /* Subtle gradient to look like fabric */
-            background: linear-gradient(180deg, var(--white-silk) 0%, var(--baby-pink) 100%);
+            background: linear-gradient(180deg, #ffffff 0%, var(--baby-pink) 100%);
         }
 
-        /* Decorative Border */
-        .card-frame {
-            border: 2px solid var(--soft-pink);
-            padding: 40px;
-            border-radius: 50% 50% 0 0; /* Arched top look */
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        /* Animation */
-        .reveal {
+        /* --- TEXT ANIMATIONS --- */
+        .animate-text {
             opacity: 0;
-            transform: scale(0.95) translateY(40px);
-            transition: all 1.5s cubic-bezier(0.2, 1, 0.3, 1);
+            transform: translateY(30px);
+            transition: all 1.2s ease-out;
         }
 
-        .reveal.active {
+        .animate-text.active {
             opacity: 1;
-            transform: scale(1) translateY(0);
+            transform: translateY(0);
         }
 
-        h1 { font-family: 'Dancing Script', cursive; color: var(--rose-pink); font-size: 3.8rem; margin: 10px 0; }
-        h2 { font-family: 'Playfair Display', serif; color: var(--deep-rose); font-size: 2.8rem; letter-spacing: 1px; }
-        p { font-size: 1.1rem; color: #5d4037; max-width: 500px; line-height: 1.6; }
-        
-        .date-box {
-            border-top: 1px solid var(--gold-accent);
-            border-bottom: 1px solid var(--gold-accent);
-            padding: 15px 0;
-            margin: 20px 0;
+        h1 { 
+            font-family: 'Dancing Script', cursive; 
+            color: var(--rose-pink); 
+            font-size: 3.5rem; 
+            margin: 10px 0;
+        }
+
+        /* Names in Italic */
+        .names {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
             color: var(--deep-rose);
-            font-weight: 600;
+            font-size: 3rem;
         }
 
-        /* QR Code Styling */
-        .qr-container {
+        .details {
+            font-size: 1.2rem;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .qr-box {
             margin-top: 20px;
             padding: 10px;
             background: white;
-            display: inline-block;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(240, 98, 146, 0.2);
+            border: 2px solid var(--soft-pink);
+            border-radius: 10px;
         }
 
         .scroll-hint {
-            position: absolute;
-            bottom: 30px;
-            color: var(--rose-pink);
+            margin-top: 50px;
             font-size: 0.8rem;
             letter-spacing: 3px;
+            color: var(--gold);
             animation: bounce 2s infinite;
         }
 
@@ -99,57 +119,74 @@
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
             40% {transform: translateY(-10px);}
         }
+
     </style>
 </head>
-<body>
+<body class="loading">
 
-    <section class="section">
-        <div class="reveal active card-frame">
-            <p style="text-transform: uppercase; letter-spacing: 4px; color: var(--gold-accent);">The Wedding of</p>
-            <h1>Save the Date</h1>
-            <p>With hearts full of love, we invite you to join us as we say "I Do".</p>
-            <div class="scroll-hint">SCROLL TO OPEN</div>
+    <div class="curtain-container" id="curtainWrapper">
+        <div class="curtain left-curtain"></div>
+        <div class="curtain right-curtain"></div>
+    </div>
+
+    <section>
+        <div class="animate-text active">
+            <p style="letter-spacing: 5px; color: var(--gold);">WELCOME TO OUR JOY</p>
+            <h1>Wedding Invitation</h1>
+            <p class="details">We request the honor of your presence <br> at the marriage of our children.</p>
+            <div class="scroll-hint">SCROLL DOWN ↓</div>
         </div>
     </section>
 
-    <section class="section" style="background: var(--soft-pink);">
-        <div class="reveal card-frame">
-            <h2>Julian Carter</h2>
-            <h1 style="font-size: 2.5rem; color: var(--white-silk);">&</h1>
-            <h2>Amelia Rose</h2>
-            <p>Two lives, two hearts, joined together in friendship, united forever in love.</p>
+    <section>
+        <div class="animate-text">
+            <p>The Happy Couple</p>
+            <div class="names">Julian Carter</div>
+            <h1 style="font-size: 2rem;">&</h1>
+            <div class="names">Amelia Rose</div>
+            <p class="details" style="margin-top: 20px;">“Two souls with but a single thought,<br>Two hearts that beat as one.”</p>
         </div>
     </section>
 
-    <section class="section">
-        <div class="reveal card-frame">
-            <h2>The Celebration</h2>
-            <div class="date-box">
-                SATURDAY | JUNE 20, 2026 | 4:30 PM
+    <section>
+        <div class="animate-text">
+            <h1>Save The Date</h1>
+            <div style="border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); padding: 10px; margin: 20px 0;">
+                <p class="details"><strong>SATURDAY | JUNE 20, 2026</strong></p>
+                <p class="details">Ceremony starts at 4:30 PM</p>
             </div>
-            <p><strong>The Rosewood Estate</strong><br>
-            123 Blossom Lane, Garden Valley</p>
+            <p class="details"><strong>The Rosewood Estate</strong><br>123 Blossom Lane, Garden Valley</p>
             
-            <div class="qr-container">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=YOUR_LINK_HERE" alt="Venue Map">
+            <div class="qr-box">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=GOOGLE_MAPS_LINK" alt="Location QR">
             </div>
-            <p style="font-size: 0.7rem; margin-top: 10px; color: var(--rose-pink);">SCAN FOR DIRECTIONS</p>
+            <p style="font-size: 0.7rem; color: var(--rose-pink); margin-top: 5px;">SCAN FOR LOCATION</p>
         </div>
     </section>
 
     <script>
+        // Trigger Curtain Opening on Page Load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.add('curtain-opened');
+            }, 500); // 0.5 second delay before opening
+        });
+
+        // Scroll Animation Logic
         function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
+            var reveals = document.querySelectorAll(".animate-text");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
+                var elementVisible = 150;
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
             }
         }
+
         window.addEventListener("scroll", reveal);
     </script>
+
 </body>
 </html>
