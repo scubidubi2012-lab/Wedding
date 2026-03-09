@@ -83,61 +83,40 @@
         .names { font-style: italic; font-size: 3.5rem; color: var(--gold); white-space: nowrap; }
 
         /* --- Section 2: Vertical Heart Layout --- */
-        .couple-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-        }
+/* Container changed to Column for vertical stacking */
+.couple-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Space between names and the photo */
+    width: 100%;
+    margin-top: -30px; /* Optional: Pulls the names slightly higher */
+}
 
-        .heart-frame {
-            position: relative;
-            width: 250px;
-            height: 250px;
-            background-color: var(--gold);
-            transform: rotate(-45deg);
-            margin: 100px 0; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: heartbeat 1.5s infinite ease-in-out;
-            box-shadow: -10px 10px 30px rgba(0,0,0,0.15);
-        }
+/* Updated styling to show the image "as is" but framed gracefully */
+.couple-photo {
+    width: 250px;       /* Professional portrait size */
+    height: 250px;      
+    object-fit: cover;  /* Ensures faces stay centered if photo isn't square */
+    border-radius: 50%; /* Makes the photo circular */
+    border: 4px solid var(--gold); /* Soft gold definition */
+    margin: 10px 0;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15); /* Soft, natural shadow */
+    display: block;
+}
 
-        .heart-frame::before,
-        .heart-frame::after {
-            content: "";
-            position: absolute;
-            width: 250px;
-            height: 250px;
-            background-color: var(--gold);
-            border-radius: 50%;
-        }
+/* Optional: Make the names slightly larger when stacked */
+.names { font-size: 3.5rem; }
 
-        .heart-frame::before { top: -125px; left: 0; }
-        .heart-frame::after { top: 0; left: 125px; }
-
-        .couple-photo {
-            position: relative;
-            z-index: 10;
-            width: 230px; 
-            height: 230px;
-            object-fit: cover;
-            transform: rotate(45deg); 
-            border-radius: 50%;
-            border: 4px solid var(--cream);
-        }
-
-        @keyframes heartbeat {
-            0% { transform: rotate(-45deg) scale(1); }
-            15% { transform: rotate(-45deg) scale(1.08); }
-            30% { transform: rotate(-45deg) scale(1); }
-            45% { transform: rotate(-45deg) scale(1.12); }
-            60% { transform: rotate(-45deg) scale(1); }
-        }
-
+/* Mobile Adjustments for a Column Layout */
+@media (max-width: 600px) {
+    .couple-photo {
+        width: 190px;
+        height: 190px;
+    }
+    .names { font-size: 2.8rem; }
+}
         /* --- Venue & Date --- */
         .venue { font-size: 1.3rem; font-weight: bold; color: #333; margin-bottom: 20px; line-height: 1.6; }
         .date { font-size: 1.8rem; color: var(--burgundy); font-weight: bold; margin-top: 15px;}
@@ -186,20 +165,16 @@
         <p>Grace us with your presence to make our day even more special.</p>
         <div class="scroll-down">↓</div>
     </section>
-
     <section id="page2">
-        <div class="couple-container">
-            <div class="names">Shubham</div>
-            
-            <div class="heart-frame animate-text">
-                <img src="Polish_20260309_225604278.png"alt="Shubham and Shreya" class="couple-photo">
-            </div>
-            
-            <div class="names">Shreya</div>
-        </div>
-        <div class="scroll-down">↓</div>
-    </section>
-
+    <div class="couple-container">
+        <div class="names">Shubham</div>
+        
+        <img src="Polish_20260309_225604278.png"alt="Shubham and Shreya" class="couple-photo animate-text">
+        
+        <div class="names">Shreya</div>
+    </div>
+    <div class="scroll-down">↓</div>
+</section>
     <section id="page3">
         <div class="venue">
             Amit Palace<br>
