@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation | Shubham & Shreya</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --gold: #d4af37;
             --burgundy: #800020;
             --cream: #fffaf0;
+            --text-gray: #555;
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             overflow-x: hidden;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif; /* Default body font */
             background-color: var(--cream);
         }
 
@@ -30,7 +31,6 @@
             perspective: 1500px;
             pointer-events: none;
         }
-
         .curtain {
             width: 50%; height: 100%;
             background: var(--burgundy);
@@ -39,10 +39,8 @@
             transition: transform 3s ease-in-out;
             box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
         }
-
         .curtain.left { left: 0; transform-origin: left; border-right: 2px solid var(--gold); }
         .curtain.right { right: 0; transform-origin: right; border-left: 2px solid var(--gold); }
-
         .loaded .curtain.left { transform: rotateY(-90deg) scaleX(0.1); }
         .loaded .curtain.right { transform: rotateY(90deg) scaleX(0.1); }
 
@@ -55,13 +53,12 @@
             pointer-events: none;
             animation: rain linear infinite;
         }
-
         @keyframes rain {
             0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- Layout --- */
+        /* --- Layout Sections --- */
         section {
             height: 100vh;
             display: flex;
@@ -75,35 +72,70 @@
             transform: translateY(30px);
             transition: all 1s ease-out;
         }
-
         section.visible { opacity: 1; transform: translateY(0); }
 
-        h1 { font-size: 3.5rem; color: var(--burgundy); margin-bottom: 10px; }
-        p { font-size: 1.2rem; color: #555; }
-        .names { font-style: italic; font-size: 3.5rem; color: var(--gold); }
+        h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--burgundy); margin-bottom: 10px; }
+        .intro-p { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--text-gray); font-weight: 300; letter-spacing: 1px;}
+        .names { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3.5rem; color: var(--gold); }
 
-        /* --- Section 2: "As-Is" Image Layout --- */
+        /* --- Section 2: Image As-Is --- */
         .couple-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             width: 100%;
         }
-
         .couple-photo {
-            width: auto;           /* Keeps original width */
-            max-width: 90%;        /* Ensures it doesn't overflow mobile screens */
-            max-height: 50vh;      /* Prevents the image from being taller than half the screen */
+            width: auto;
+            max-width: 85%;
+            max-height: 50vh;
             display: block;
             margin: 10px 0;
-            /* No borders, no radius, just the photo */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        /* --- Venue & Date --- */
-        .venue { font-size: 1.3rem; font-weight: bold; color: #333; margin-bottom: 20px; line-height: 1.6; }
-        .date { font-size: 1.8rem; color: var(--burgundy); font-weight: bold; }
+        /* --- Page 3: Venue Styling --- */
+        .venue-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--burgundy);
+            margin-bottom: 15px;
+        }
+        .address-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #333;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+        .qr-container {
+            margin: 10px 0;
+            padding: 12px;
+            background: white;
+            border: 1px solid var(--gold);
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .date-box {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--burgundy);
+            font-weight: 700;
+            margin-top: 15px;
+            border-top: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
+            padding: 10px 40px;
+        }
+        .time-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text-gray);
+            margin-top: 10px;
+        }
 
         .scroll-down {
             position: absolute;
@@ -114,15 +146,15 @@
             font-size: 2rem;
             color: var(--gold);
         }
-
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
             40% {transform: translateX(-50%) translateY(-10px);}
         }
 
         @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
-            .names { font-size: 2.5rem; }
+            h1 { font-size: 2.4rem; }
+            .names { font-size: 2.8rem; }
+            .date-box { font-size: 1.8rem; padding: 10px 20px; }
         }
     </style>
 </head>
@@ -136,60 +168,59 @@
     <div id="petal-container"></div>
 
     <section id="page1">
-        <h1 class="animate-text">Wedding Invitation</h1>
-        <p>Grace us with your presence to make our day even more special.</p>
+        <h1>Wedding Invitation</h1>
+        <p class="intro-p">Grace us with your presence to make our day even more special.</p>
         <div class="scroll-down">↓</div>
     </section>
 
     <section id="page2">
         <div class="couple-container">
             <div class="names">Shubham</div>
-            
-            <img src="DSC_0418.JPG" alt="Shubham and Shreya" class="couple-photo visible">
-            
+            <img src="DSC_0418.JPG" alt="Shubham and Shreya" class="couple-photo">
             <div class="names">Shreya</div>
         </div>
         <div class="scroll-down">↓</div>
     </section>
 
     <section id="page3">
-        <div class="venue">
-            Amit Palace<br>
-            <span style="font-weight: normal; font-size: 0.95rem; color: #555;">
-                Manchar - Bhimashankar Rd, Dhondmal, Shindewadi,<br>
-                Ghodegaon, Pune, Maharashtra 412408
-            </span>
+        <div class="venue-title">Amit Palace</div>
+        <div class="address-text">
+            Manchar - Bhimashankar Rd, Dhondmal,<br>
+            Shindewadi, Ghodegaon,<br>
+            Pune, Maharashtra 412408
         </div>
-        <div class="date">March 16, 2026</div>
-        <p style="font-size: 1.2rem;">10:00 AM Onwards</p>
+
+        <div class="qr-container">
+            <a href="https://maps.app.goo.gl/3Vv8i" target="_blank">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https://maps.app.goo.gl/3Vv8i" 
+                     alt="Tap for Location">
+            </a>
+        </div>
+        <p style="font-size: 0.75rem; color: #999; margin-top: 5px;">Tap or Scan for Navigation</p>
+
+        <div class="date-box">March 16, 2026</div>
+        <div class="time-text">10:00 AM Onwards</div>
     </section>
 
     <script>
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-            }, 500);
+            setTimeout(() => { document.body.classList.add('loaded'); }, 500);
         });
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) { entry.target.classList.add('visible'); }
             });
         }, { threshold: 0.3 });
 
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
+        document.querySelectorAll('section').forEach(section => { observer.observe(section); });
 
         function createPetal() {
             const container = document.getElementById('petal-container');
             const petal = document.createElement('div');
             petal.classList.add('petal');
             const size = Math.random() * 15 + 10 + 'px';
-            petal.style.width = size;
-            petal.style.height = size;
+            petal.style.width = size; petal.style.height = size;
             petal.style.left = Math.random() * 100 + 'vw';
             petal.style.animationDuration = Math.random() * 3 + 2 + 's';
             container.appendChild(petal);
