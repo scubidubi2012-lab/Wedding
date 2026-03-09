@@ -61,7 +61,7 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- Content Layout --- */
+        /* --- Layout --- */
         section {
             height: 100vh;
             display: flex;
@@ -80,46 +80,30 @@
 
         h1 { font-size: 3.5rem; color: var(--burgundy); margin-bottom: 10px; }
         p { font-size: 1.2rem; color: #555; }
-        .names { font-style: italic; font-size: 3.5rem; color: var(--gold); white-space: nowrap; }
+        .names { font-style: italic; font-size: 3.5rem; color: var(--gold); }
 
-        /* --- Section 2: Vertical Heart Layout --- */
-/* Container changed to Column for vertical stacking */
-.couple-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 15px; /* Space between names and the photo */
-    width: 100%;
-    margin-top: -30px; /* Optional: Pulls the names slightly higher */
-}
+        /* --- Section 2: "As-Is" Image Layout --- */
+        .couple-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
 
-/* Updated styling to show the image "as is" but framed gracefully */
-.couple-photo {
-    width: 250px;       /* Professional portrait size */
-    height: 250px;      
-    object-fit: cover;  /* Ensures faces stay centered if photo isn't square */
-    border-radius: 50%; /* Makes the photo circular */
-    border: 4px solid var(--gold); /* Soft gold definition */
-    margin: 10px 0;
-    box-shadow: 0 12px 25px rgba(0,0,0,0.15); /* Soft, natural shadow */
-    display: block;
-}
+        .couple-photo {
+            width: auto;           /* Keeps original width */
+            max-width: 90%;        /* Ensures it doesn't overflow mobile screens */
+            max-height: 50vh;      /* Prevents the image from being taller than half the screen */
+            display: block;
+            margin: 10px 0;
+            /* No borders, no radius, just the photo */
+        }
 
-/* Optional: Make the names slightly larger when stacked */
-.names { font-size: 3.5rem; }
-
-/* Mobile Adjustments for a Column Layout */
-@media (max-width: 600px) {
-    .couple-photo {
-        width: 190px;
-        height: 190px;
-    }
-    .names { font-size: 2.8rem; }
-}
         /* --- Venue & Date --- */
         .venue { font-size: 1.3rem; font-weight: bold; color: #333; margin-bottom: 20px; line-height: 1.6; }
-        .date { font-size: 1.8rem; color: var(--burgundy); font-weight: bold; margin-top: 15px;}
+        .date { font-size: 1.8rem; color: var(--burgundy); font-weight: bold; }
 
         .scroll-down {
             position: absolute;
@@ -136,18 +120,9 @@
             40% {transform: translateX(-50%) translateY(-10px);}
         }
 
-        /* --- Mobile Responsiveness --- */
         @media (max-width: 600px) {
             h1 { font-size: 2.5rem; }
             .names { font-size: 2.5rem; }
-            .heart-frame, .heart-frame::before, .heart-frame::after {
-                width: 180px;
-                height: 180px;
-            }
-            .heart-frame::before { top: -90px; }
-            .heart-frame::after { left: 90px; }
-            .couple-photo { width: 165px; height: 165px; }
-            .heart-frame { margin: 80px 0; }
         }
     </style>
 </head>
@@ -165,16 +140,18 @@
         <p>Grace us with your presence to make our day even more special.</p>
         <div class="scroll-down">↓</div>
     </section>
+
     <section id="page2">
-    <div class="couple-container">
-        <div class="names">Shubham</div>
-        
-        <img src="Polish_20260309_225604278.png"alt="Shubham and Shreya" class="couple-photo animate-text">
-        
-        <div class="names">Shreya</div>
-    </div>
-    <div class="scroll-down">↓</div>
-</section>
+        <div class="couple-container">
+            <div class="names">Shubham</div>
+            
+            <img src="DSC_0418.JPG" alt="Shubham and Shreya" class="couple-photo visible">
+            
+            <div class="names">Shreya</div>
+        </div>
+        <div class="scroll-down">↓</div>
+    </section>
+
     <section id="page3">
         <div class="venue">
             Amit Palace<br>
@@ -183,16 +160,6 @@
                 Ghodegaon, Pune, Maharashtra 412408
             </span>
         </div>
-
-        <div style="margin: 20px 0;">
-            <a href="https://maps.app.goo.gl/YourActualLinkHere" target="_blank">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://maps.app.goo.gl/YourActualLinkHere" 
-                     alt="Scan for Directions" 
-                     style="border: 2px solid var(--gold); padding: 5px; background: white;">
-            </a>
-            <p style="font-size: 0.8rem; margin-top: 5px; color: #888;">Tap or Scan for Location</p>
-        </div>
-
         <div class="date">March 16, 2026</div>
         <p style="font-size: 1.2rem;">10:00 AM Onwards</p>
     </section>
