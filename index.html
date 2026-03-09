@@ -143,15 +143,26 @@
             from { opacity: 0; filter: blur(10px); }
             to { opacity: 1; filter: blur(0); }
         }
-        .intro-photo {
-    width: 200px; 
-    height: 200px;
+        /* Styling for the image on Page 2 */
+.couple-photo {
+    width: 260px;
+    height: 340px;
     object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid var(--gold);
-    margin-bottom: 20px;
-    /* This ensures it doesn't appear until the curtain starts moving */
-    transition: opacity 2s ease-in; 
+    border: 6px solid white; /* Inner border */
+    outline: 2px solid var(--gold); /* Outer gold border */
+    border-radius: 15px; /* Elegant rounded corners */
+    margin: 15px 0;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    display: block;
+}
+
+/* Ensure names on page 2 are slightly smaller if the screen is small */
+@media (max-width: 600px) {
+    .couple-photo {
+        width: 200px;
+        height: 260px;
+    }
+    .names { font-size: 2.8rem; }
 }
     </style>
 </head>
@@ -164,19 +175,21 @@
 
     <div id="petal-container"></div>
 
-    <section id="page1">
-    <img src="DSC_0418.JPG" alt="Shubham and Shreya" class="intro-photo animate-text">  
+<section id="page1">
     <h1 class="animate-text">Wedding Invitation</h1>
     <p>Grace us with your presence to make our day even more special for us.</p>
     <div class="scroll-down">↓</div>
 </section>
-    <section id="page2">
-        <div class="names">Shubham</div>
-        <div class="and-symbol">&</div>
-        <div class="names">Shreya</div>
-        <div class="scroll-down">↓</div>
-    </section>
 
+<section id="page2">
+    <div class="names">Shubham</div>
+    
+    <img src="DSC_451.JPG" alt="Shubham and Shreya" class="couple-photo animate-text">
+    
+    <div class="and-symbol">&</div>
+    <div class="names">Shreya</div>
+    <div class="scroll-down">↓</div>
+</section>
         <section id="page3">
         <div class="venue">
             Amit Palace<br>
