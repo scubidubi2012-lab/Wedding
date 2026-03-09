@@ -143,74 +143,82 @@
             from { opacity: 0; filter: blur(10px); }
             to { opacity: 1; filter: blur(0); }
         }
-        /* Styling for the image on Page 2 */
-.couple-/* Container to hold names and heart in one line */
-.couple-container {
+        .couple-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 30px; /* Space between names and heart */
+    gap: 40px;
     width: 100%;
 }
 
-/* Heart Frame Styling */
+/* The Gold Heart Frame */
 .heart-frame {
     position: relative;
-    width: 180px;
-    height: 180px;
-    transform: rotate(-45deg);
+    width: 280px;  /* Increased Size */
+    height: 280px;
     background-color: var(--gold);
-    margin: 60px 0; /* Vertical space */
-    animation: pulse 2s infinite; /* Gentle heartbeat effect */
+    /* This creates the heart shape perfectly */
+    clip-path: path('M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.146-1.28-2.104-3.523-3.146-5.726-3.146-3.277 0-6.274 2.16-6.274 6.181 0 4.671 4.545 9.176 12 16.808 7.455-7.632 12-12.137 12-16.808 0-4.021-2.997-6.181-6.274-6.181z');
+    transform: scale(10); /* Scales the SVG path to fit the 280px container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: heartbeat 1.5s infinite ease-in-out;
+}
+
+/* Legacy CSS Heart Method (Better for most browsers) */
+.heart-frame {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    background-color: var(--gold);
+    transform: rotate(-45deg);
+    margin: 50px 0;
 }
 
 .heart-frame::before,
 .heart-frame::after {
     content: "";
     position: absolute;
-    width: 180px;
-    height: 180px;
+    width: 250px;
+    height: 250px;
     background-color: var(--gold);
     border-radius: 50%;
 }
+.heart-frame::before { top: -125px; left: 0; }
+.heart-frame::after { top: 0; left: 125px; }
 
-.heart-frame::before { top: -90px; left: 0; }
-.heart-frame::after { top: 0; left: 90px; }
-
+/* The Image - Shrunk slightly to show the Gold Heart behind it */
 .couple-photo {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    width: 90%;  /* Makes image 90% of the heart size to show gold border */
+    height: 90%;
     object-fit: cover;
-    transform: rotate(45deg) scale(1.3);
-    border-radius: 5px;
-    position: relative;
     z-index: 10;
+    transform: rotate(45deg); /* Keeps image straight while heart is rotated */
+    border-radius: 50% 50% 0 0; /* Optional: rounds the top of the photo to match heart */
+    clip-path: inherit; /* Matches the heart shape */
 }
 
-/* Heartbeat Animation */
-@keyframes pulse {
+@keyframes heartbeat {
     0% { transform: rotate(-45deg) scale(1); }
-    50% { transform: rotate(-45deg) scale(1.05); }
-    100% { transform: rotate(-45deg) scale(1); }
+    15% { transform: rotate(-45deg) scale(1.1); }
+    30% { transform: rotate(-45deg) scale(1); }
+    45% { transform: rotate(-45deg) scale(1.15); }
+    60% { transform: rotate(-45deg) scale(1); }
 }
 
-/* Mobile Responsiveness */
+/* Mobile Fix */
 @media (max-width: 768px) {
-    .couple-container {
-        gap: 15px;
+    .couple-container { gap: 10px; }
+    .names { font-size: 1.5rem; }
+    .heart-frame, .heart-frame::before, .heart-frame::after {
+        width: 120px;
+        height: 120px;
     }
-    .names { font-size: 1.8rem; } /* Shrink names to fit on one line */
-    .heart-frame {
-        width: 100px;
-        height: 100px;
-    }
-    .heart-frame::before, .heart-frame::after {
-        width: 100px;
-        height: 100px;
-    }
-    .heart-frame::before { top: -50px; }
-    .heart-frame::after { left: 50px; }
+    .heart-frame::before { top: -60px; }
+    .heart-frame::after { left: 60px; }
 }
     </style>
 </head>
