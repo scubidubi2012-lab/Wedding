@@ -143,6 +143,15 @@
             from { opacity: 0; filter: blur(10px); }
             to { opacity: 1; filter: blur(0); }
         }
+        .intro-photo {
+    width: 180px;         /* Size of the photo */
+    height: 180px;
+    object-fit: cover;    /* Prevents the image from stretching */
+    border-radius: 50%;   /* Makes it a perfect circle */
+    border: 3px solid var(--gold);
+    margin-bottom: 20px;  /* Space between photo and text */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2); /* Soft shadow */
+        }
     </style>
 </head>
 <body>
@@ -155,10 +164,13 @@
     <div id="petal-container"></div>
 
     <section id="page1">
-        <h1 class="animate-text">Wedding Invitation</h1>
-        <p>Grace us with your presence to make our day even more special for us.</p>
-        <div class="scroll-down">↓</div>
-    </section>
+    <img src="DSC_0418.jpg" alt="Couple" class="intro-photo animate-text">
+    
+    <h1 class="animate-text">Wedding Invitation</h1>
+    <p>Grace us with your presence to make our day even more special.</p>
+    <div class="scroll-down">↓</div>
+</section>
+
 
     <section id="page2">
         <div class="names">Shubham</div>
